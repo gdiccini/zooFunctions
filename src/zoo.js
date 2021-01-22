@@ -15,8 +15,8 @@ const { animals } = data;
 
 function animalsByIds(...ids) {
   const arrayOfAnimals = [];
-  ids.forEach(id => {
-    animals.filter((animal) => (animal.id === id ? arrayOfAnimals.push(animal) : undefined));
+  ids.forEach((id) => {
+    animals.filter(animal => (animal.id === id ? arrayOfAnimals.push(animal) : undefined));
   });
   return arrayOfAnimals;
 }

@@ -66,8 +66,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   const [singleSpecie] = animals.filter(singleAnimal => singleAnimal.name === species);
   const allAnimals = {};
-  animals.forEach(animal => {
-    allAnimals[animal.name] = animal.residents.length
+  animals.forEach((animal) => {
+    allAnimals[animal.name] = animal.residents.length;
   });
   if (species !== undefined) {
     const pop = singleSpecie.residents.length;
@@ -102,7 +102,7 @@ function schedule(dayName) {
   if (dayName === undefined) {
     return scheduleObject;
   }
-  return singleDay[2];  
+  return singleDay[2];
 }
 
 function oldestFromFirstSpecies(id) {

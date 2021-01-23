@@ -64,12 +64,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 
 function animalCount(species) {
-  if (species !== undefined) {
-    const [singleSpecie] = animals.filter(singleAnimal => singleAnimal.name === species);
-    return singleSpecie.residents.length;;
-  }
+  const [singleSpecie] = animals.filter(singleAnimal => singleAnimal.name === species);
   const allAnimals = {}
   animals.forEach((animal) => allAnimals[animal.name] = animal.residents.length);
+  if (species !== undefined) {
+    return singleSpecie.residents.length;
+  }  
   return allAnimals;
 }
 
@@ -80,12 +80,39 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const regions = { NE, NW, SE, SW };
+  if (options === undefined) {
+    animals.forEach((animal) => {
+
+    })
+  }
 }
 
 function schedule(dayName) {
-  // seu código aqui
-}
+  const openingHours = Object.entries(hours);
+  const scheduleObject = {};
+  const scheduleObjArray = [];
+
+  openingHours.forEach((day, index) => {
+    const dayOfWeek = {}
+    dayOfWeek[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`
+    scheduleObjArray.push(dayOfWeek);
+    scheduleObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  });
+
+  scheduleObject['Monday'] = 'CLOSED';
+  scheduleObjArray[6] = { Monday: 'CLOSED' };
+  openingHours.forEach((day, index) => day.push(scheduleObjArray[index]));
+
+  if (dayName === undefined) {
+    console.log(scheduleObjArray)  
+    console.log(openingHours)
+    return scheduleObject;    
+  } else {
+    const singleDay = openingHours.find((element) => element[0] === dayName);
+    return singleDay[2];
+  }
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui

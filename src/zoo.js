@@ -82,8 +82,9 @@ function entryCalculator(entrants) {
 function animalMap(options) {
 }
 
-// function schedule(dayName) {
-//   const openingHours = Object.entries(hours);
+function schedule(dayName) {
+  const openingHours = Object.entries(hours);
+  return openingHours;
 //   const scheduleObject = {};
 //   const scheduleObjArray = [];
 
@@ -103,17 +104,17 @@ function animalMap(options) {
 //     return scheduleObject;
 //   }
 //   return singleDay[2];
-// }
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  const  {Adult, Senior, Child}  = prices;
-  data.prices.Adult = parseFloat((Adult * (1 + percentage/100) + 0.005).toFixed(2));
-  data.prices.Senior = parseFloat((Senior * (1 + percentage/100) + 0.005).toFixed(2));
-  data.prices.Child = parseFloat((Child * (1 + percentage/100) + 0.005).toFixed(2));
+  const { Adult, Senior, Child } = prices;
+  data.prices.Adult = parseFloat((Adult * ((1 + percentage/100) + 0.005)).toFixed(2));
+  data.prices.Senior = parseFloat((Senior * ((1 + percentage/100) + 0.005)).toFixed(2));
+  data.prices.Child = parseFloat((Child * ((1 + percentage/100) + 0.005)).toFixed(2));
 }
 
 function employeeCoverage(idOrName) {

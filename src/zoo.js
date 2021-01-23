@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, hours } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   const arrayOfAnimals = [];
@@ -82,35 +82,38 @@ function entryCalculator(entrants) {
 function animalMap(options) {
 }
 
-function schedule(dayName) {
-  const openingHours = Object.entries(hours);
-  const scheduleObject = {};
-  const scheduleObjArray = [];
+// function schedule(dayName) {
+//   const openingHours = Object.entries(hours);
+//   const scheduleObject = {};
+//   const scheduleObjArray = [];
 
-  openingHours.forEach((day, index) => {
-    const dayOfWeek = {};
-    dayOfWeek[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
-    scheduleObjArray.push(dayOfWeek);
-    scheduleObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
-  });
+//   openingHours.forEach((day, index) => {
+//     const dayOfWeek = {};
+//     dayOfWeek[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+//     scheduleObjArray.push(dayOfWeek);
+//     scheduleObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+//   });
 
-  scheduleObject.Monday = 'CLOSED';
-  scheduleObjArray[6] = { Monday: 'CLOSED' };
-  openingHours.forEach((day, index) => day.push(scheduleObjArray[index]));
-  const singleDay = openingHours.find(element => element[0] === dayName);
+//   scheduleObject.Monday = 'CLOSED';
+//   scheduleObjArray[6] = { Monday: 'CLOSED' };
+//   openingHours.forEach((day, index) => day.push(scheduleObjArray[index]));
+//   const singleDay = openingHours.find(element => element[0] === dayName);
 
-  if (dayName === undefined) {
-    return scheduleObject;
-  }
-  return singleDay[2];
-}
+//   if (dayName === undefined) {
+//     return scheduleObject;
+//   }
+//   return singleDay[2];
+// }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const  {Adult, Senior, Child}  = prices;
+  data.prices.Adult = parseFloat((Adult * (1 + percentage/100) + 0.005).toFixed(2));
+  data.prices.Senior = parseFloat((Senior * (1 + percentage/100) + 0.005).toFixed(2));
+  data.prices.Child = parseFloat((Child * (1 + percentage/100) + 0.005).toFixed(2));
 }
 
 function employeeCoverage(idOrName) {

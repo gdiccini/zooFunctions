@@ -66,7 +66,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   const [singleSpecie] = animals.filter(singleAnimal => singleAnimal.name === species);
   const allAnimals = {};
-  animals.forEach((animal) => allAnimals[animal.name] = animal.residents.length);
+  animals.forEach(animal => {
+    allAnimals[animal.name] = animal.residents.length
+  });
   if (species !== undefined) {
     const pop = singleSpecie.residents.length;
     return pop;
@@ -92,17 +94,16 @@ function schedule(dayName) {
     scheduleObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   });
 
-  scheduleObject['Monday'] = 'CLOSED';
+  scheduleObject.Monday = 'CLOSED';
   scheduleObjArray[6] = { Monday: 'CLOSED' };
   openingHours.forEach((day, index) => day.push(scheduleObjArray[index]));
+  const singleDay = openingHours.find(element => element[0] === dayName);
 
   if (dayName === undefined) {
     return scheduleObject;
-  } else {
-    const singleDay = openingHours.find((element) => element[0] === dayName);
-    return singleDay[2];
   }
-};
+  return singleDay[2];  
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui

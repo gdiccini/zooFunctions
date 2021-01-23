@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, hours, prices } = data;
+const { animals, employees, hours } = data;
 
 function animalsByIds(...ids) {
   const arrayOfAnimals = [];
@@ -65,27 +65,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   const [singleSpecie] = animals.filter(singleAnimal => singleAnimal.name === species);
-  const allAnimals = {}
+  const allAnimals = {};
   animals.forEach((animal) => allAnimals[animal.name] = animal.residents.length);
   if (species !== undefined) {
-    return singleSpecie.residents.length;
-  }  
+    const pop = singleSpecie.residents.length;
+    return pop;
+  }
   return allAnimals;
 }
 
 function entryCalculator(entrants) {
-  if (entrants === 0 || entrants === undefined) {
-    return 0;
-  }
 }
 
 function animalMap(options) {
-  const regions = { NE, NW, SE, SW };
-  if (options === undefined) {
-    animals.forEach((animal) => {
-
-    })
-  }
 }
 
 function schedule(dayName) {
@@ -94,8 +86,8 @@ function schedule(dayName) {
   const scheduleObjArray = [];
 
   openingHours.forEach((day, index) => {
-    const dayOfWeek = {}
-    dayOfWeek[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`
+    const dayOfWeek = {};
+    dayOfWeek[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
     scheduleObjArray.push(dayOfWeek);
     scheduleObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   });
@@ -105,9 +97,7 @@ function schedule(dayName) {
   openingHours.forEach((day, index) => day.push(scheduleObjArray[index]));
 
   if (dayName === undefined) {
-    console.log(scheduleObjArray)  
-    console.log(openingHours)
-    return scheduleObject;    
+    return scheduleObject;
   } else {
     const singleDay = openingHours.find((element) => element[0] === dayName);
     return singleDay[2];

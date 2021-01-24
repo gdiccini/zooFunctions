@@ -148,22 +148,33 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  const namesAndCoverageCode = {};
-  employees.forEach((worker) => {
-    const empName = `${worker.firstName} ${worker.lastName}`;
-    const animalsCodes = worker.responsibleFor;
-    const animalsNames = [];
-    animalsCodes.forEach((code, index) => {
+  const employeesInfoArray = employees.map(current => [
+    current.id,
+    current.firstName,
+    current.lastName,
+    current.responsibleFor,
+  ],
+  );
+  // Transforms de current.responsibleFor codes into animals names;
+  employeesInfoArray.forEach((employee, index1) => {
+    employee[3].forEach((animalCode, index2) => {
       animals.forEach((animal) => {
-        const animalName = animal.name;
-        if (animal.id === code) {
-          animalsNames.push(animalName);
+        if (animalCode === animal.id) {
+          employeesInfoArray[index1][3][index2] = animal.name;
         }
       });
     });
-    namesAndCoverageCode[empName] = animalsNames;
   });
-  return namesAndCoverageCode;
+  // crian um objeto com o retorno esperado dependendo de idOrName
+  const resp = {};
+  employeesInfoArray.forEach((current) => {
+    if (idOrName === undefined) {
+      resp[`${current[1]} ${current[2]}`] = current[3];
+    } else if (idOrName === current[0] || idOrName === current[1] || idOrName === current[2]) {
+      resp[`${current[1]} ${current[2]}`] = current[3];
+    }
+  });
+  return resp;
 }
 
 module.exports = {

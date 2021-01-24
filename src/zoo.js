@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, hours } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   const arrayOfAnimals = [];
@@ -110,11 +110,11 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // const { Adult, Senior, Child } = prices;
-  // const percent = percentage / 100;
-  // data.prices.Adult = parseFloat((Adult * ((1 + percentage / 100) + 0.005)).toFixed(2));
-  // data.prices.Senior = parseFloat((Senior * ((1 + percentage / 100) + 0.005)).toFixed(2));
-  // data.prices.Child = parseFloat((Child * ((1 + percentage / 100) + 0.005)).toFixed(2));
+  const { Adult, Senior, Child } = prices;
+  const percent = 1 + (percentage / 100);
+  data.prices.Adult = (Math.round(Adult * 100 * percent)) / 100;
+  data.prices.Senior = (Math.round(Senior * 100 * percent)) / 100;
+  data.prices.Child = (Math.round(Child * 100 * percent)) / 100;
 }
 
 function employeeCoverage(idOrName) {

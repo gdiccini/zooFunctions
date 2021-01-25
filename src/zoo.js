@@ -98,8 +98,66 @@ function entryCalculator(entrants) {
   return sum;
 }
 
-function animalMap(options) {
+// INÍCIO das Funções auxiliares animalMap
 
+// Função que ordena os arrays quando necessário
+function sortedOrNot(options, specie, animalsNames, speciesOnRegions) {
+  const animalObj = {};
+  if (options.sorted === true) {
+    animalObj[specie.name] = animalsNames.sort();
+  } else {
+    animalObj[specie.name] = animalsNames;
+  }
+  speciesOnRegions[specie.location].push(animalObj);
+}
+
+// Função quando nenhum argumento é passado
+function noArgument() {
+  const speciesOnRegions = { NE: [], NW: [], SE: [], SW: [] };
+  animals.forEach((animal) => {
+    speciesOnRegions[animal.location].push(animal.name);
+  });
+  return speciesOnRegions;
+}
+
+// Função quando há includeNames: true
+function mapWithNames(options) {
+  const speciesOnRegions = { NE: [], NW: [], SE: [], SW: [] };
+  animals.forEach((specie) => {
+    const animalsNames = [];
+    specie.residents.forEach((animal) => {
+      animalsNames.push(animal.name);
+    });
+    sortedOrNot(options, specie, animalsNames, speciesOnRegions);
+  });
+  return speciesOnRegions;
+}
+
+// Função quando há includeNames: true && ( sex:'female' || sex:'male' )
+function mapWithNamesAndSex(options) {
+  const speciesOnRegions = { NE: [], NW: [], SE: [], SW: [] };
+  animals.forEach((specie) => {
+    const animalsNames = [];
+    specie.residents.forEach((animal) => {
+      if (animal.sex === options.sex) {
+        animalsNames.push(animal.name);
+      }
+    });
+    sortedOrNot(options, specie, animalsNames, speciesOnRegions);
+  });
+  return speciesOnRegions;
+}
+// FIM das funções auxiliares da fn animalMap
+
+function animalMap(options) {
+  if (options === undefined) {
+    return noArgument();
+  } else if (options.includeNames !== undefined && options.sex !== undefined) {
+    return mapWithNamesAndSex(options);
+  } else if (options.includeNames !== undefined) {
+    return mapWithNames(options);
+  }
+  return noArgument();
 }
 
 function schedule(dayName) {
